@@ -22,8 +22,6 @@
 	}
 
 	a {
-		text-decoration: none;
-		color: #545454;
 		display: inline-block;
 	}
 
