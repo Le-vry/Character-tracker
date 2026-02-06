@@ -32,16 +32,18 @@
 <style>
 	main {
 		width: 100%;
-		min-height: calc(100vh - 4vh);
+		height: calc(100vh - 4vh);
 		padding: 2rem;
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
+		overflow: hidden;
 	}
 
 	h1 {
 		font-size: 2rem;
 		margin: 0;
+		flex-shrink: 0;
 	}
 
 	p {
