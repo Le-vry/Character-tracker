@@ -22,6 +22,8 @@
 	}
 
 	a {
+        color: blue;
+        text-decoration: underline;
 		display: inline-block;
 	}
 
