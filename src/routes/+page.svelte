@@ -36,6 +36,8 @@
 		padding: 2rem;
 		display: flex;
 		flex-direction: column;
+        justify-content: center;
+        align-items: center;
 		gap: 2rem;
 		overflow: hidden;
 	}
@@ -55,33 +57,6 @@
 		flex-direction: column;
 		gap: 1rem;
 		max-width: 300px;
-	}
-
-	a {
-		padding: 0.5rem 1rem;
-		text-decoration: none;
-		color: #545454;
-		border: 1px solid #545454;
-		display: inline-block;
-		width: fit-content;
-	}
-
-	a:hover {
-		background: #545454;
-		color: white;
-	}
-
-	button {
-		padding: 0.5rem 1rem;
-		background: #545454;
-		color: white;
-		border: none;
-		cursor: pointer;
-		width: fit-content;
-	}
-
-	button:hover {
-		background: #333;
 	}
 
 	form {
