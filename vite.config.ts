@@ -1,5 +1,6 @@
 import { sveltekit } from '@sveltejs/kit/vite';
 import { defineConfig } from 'vite';
+import path from 'path';
 
 export default defineConfig({
 	plugins: [sveltekit()],
@@ -7,10 +8,15 @@ export default defineConfig({
 	ssr: {
 		external: ['@prisma/client']
 	},
-	
+	resolve: {
+		alias: {
+			// Make bare import `prisma` resolve to our local prisma wrapper
+			prisma: path.resolve(__dirname, 'prisma', 'prisma.ts')
+		}
+	},
 	build: {
 		rollupOptions: {
-		external: ['@prisma/client', 'prisma']
+			external: ['@prisma/client']
 		}
 	}
 });
