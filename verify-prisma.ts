@@ -1,7 +1,7 @@
 import { PrismaClient } from './src/generated/client.ts';
-import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
+import { PrismaPg } from '@prisma/adapter-pg';
 
-const adapter = new PrismaBetterSqlite3({ url: "file:./prisma/dev.db" });
+const adapter = new PrismaPg({ url: "file:./prisma/dev.db" });
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
