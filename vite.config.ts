@@ -6,11 +6,11 @@ export default defineConfig({
 	plugins: [sveltekit()],
 
 	ssr: {
-		external: ['@prisma/client']
+		external: ['@prisma/client', 'prisma']
 	},
 	build: {
 		rollupOptions: {
-			external: ['@prisma/client']
+			external: ['@prisma/client', 'prisma']
 		}
 	}
 });
