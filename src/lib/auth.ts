@@ -1,4 +1,4 @@
-import { prisma } from 'prisma';
+import { prisma } from '$lib/server/prisma';
 import { redirect } from '@sveltejs/kit';
 
 // Din uppgift: Implementera denna funktion
