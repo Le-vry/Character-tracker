@@ -3,6 +3,11 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
 	plugins: [sveltekit()],
+
+	ssr: {
+		external: ['@prisma/client']
+	},
+	
 	build: {
 		rollupOptions: {
 		external: ['@prisma/client', 'prisma']
