@@ -19,11 +19,13 @@
 {@render children()}
 
 <style>
-	:global body {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
+	:global(body), :global(html){
+		margin: 0%;
+		padding: 0%;
+		height: 100vh;
+		width: 100vw;
+	} 
+	
 	nav{
 		display: flex;
 		flex-direction: row;
@@ -33,6 +35,7 @@
 		border-bottom: 0.2vh #cecdcd solid;
 		box-shadow: 0px 0px 3px 2px #5454548a;
 		list-style: none;
+		overflow-x: hidden;
 	}
 	.link_container{
 		display: block;
@@ -40,6 +43,7 @@
 		top: 7.5px;
 		width: 100vw;
 		align-content: center;
+		overflow-x: hidden;
 	}
 
 	.link{

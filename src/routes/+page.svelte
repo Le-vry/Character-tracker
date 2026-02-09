@@ -33,14 +33,14 @@
 <style>
 	main {
 		width: 100%;
-		height: calc(100vh - 4vh);
-		padding: 2rem;
+		height: 80%;
 		display: flex;
 		flex-direction: column;
         justify-content: top;
         align-items: center;
-		gap: 2rem;
-		overflow: hidden;
+		overflow-x: hidden;
+        overflow-y: hidden;
+		background-size: cover;
 	}
 
 	h1 {

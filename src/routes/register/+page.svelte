@@ -31,7 +31,7 @@
 
 <style>
 	main {
-		width: 100%;
+		width: 100vw;
 		height: 80vh;
 		display: flex;
 		flex-direction: column;

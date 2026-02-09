@@ -19,6 +19,7 @@
 		align-items: center;
 		justify-content: center;
 		text-align: center;
+		background-size: cover;
 	}
 
 	a {
