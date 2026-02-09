@@ -23,8 +23,9 @@
 	{:else}
 		<div>
 			<p>Get started by logging in or registering</p>
-			<a href="/login">Login</a>
-			<a href="/register">Register</a>
+			<div style="flex-direction: row;">
+                <a href="/login">Login</a><a href="/register">Register</a>
+            </div>
 		</div>
 	{/if}
 </main>
@@ -55,6 +56,7 @@
 	div {
 		display: flex;
 		flex-direction: column;
+        align-items: center;
 		gap: 1rem;
 		max-width: 300px;
 	}

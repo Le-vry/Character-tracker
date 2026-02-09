@@ -37,7 +37,7 @@
 		height: 80vh;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: top;
 		align-items: center;
 		overflow-x: hidden;
 		overflow-y: hidden;
