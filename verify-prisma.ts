@@ -1,7 +1,8 @@
 import { PrismaClient } from './src/generated/client.ts';
 import { PrismaPg } from '@prisma/adapter-pg';
 
-const adapter = new PrismaPg({ url: "file:./prisma/dev.db" });
+const connectionString = `${process.env.DATABASE_URL}`
+const adapter = new PrismaPg({connectionString});
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
