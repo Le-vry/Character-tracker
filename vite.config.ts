@@ -8,12 +8,6 @@ export default defineConfig({
 	ssr: {
 		external: ['@prisma/client']
 	},
-	resolve: {
-		alias: {
-			// Make bare import `prisma` resolve to our local prisma wrapper
-			prisma: path.resolve(__dirname, 'prisma', 'prisma.ts')
-		}
-	},
 	build: {
 		rollupOptions: {
 			external: ['@prisma/client']
