@@ -1,15 +1,15 @@
-import { PrismaClient } from '../src/generated/client';
+import { PrismaClient } from '../../generated/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 
 declare global {
   // Provide a typed property on globalThis to store the client between module reloads
   // eslint-disable-next-line no-var
   var __PRISMA_CLIENT__:
-    | import('../src/generated/client').PrismaClient
+    | import('../../generated/client').PrismaClient
     | undefined;
 
   interface GlobalThis {
-    __PRISMA_CLIENT__?: import('../src/generated/client').PrismaClient;
+    __PRISMA_CLIENT__?: import('../../generated/client').PrismaClient;
   }
 }
 
