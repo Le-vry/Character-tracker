@@ -1,4 +1,4 @@
-import { prisma } from '$lib/server/prisma';
+import { prisma } from '$lib';
 import { requireAuth } from '$lib/server/auth';
 import type { PageServerLoad } from './$types';
 
