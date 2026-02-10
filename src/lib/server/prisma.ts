@@ -1,24 +1,20 @@
-import { PrismaClient } from '../../generated/client';
-import { PrismaPg } from '@prisma/adapter-pg';
+import { PrismaClient } from '@prisma/client';
 
 declare global {
-  // Provide a typed property on globalThis to store the client between module reloads
-  // eslint-disable-next-line no-var
-  var __PRISMA_CLIENT__:
-    | import('../../generated/client').PrismaClient
-    | undefined;
+  var prisma: PrismaClient | undefined;
+}
 
-  interface GlobalThis {
-    __PRISMA_CLIENT__?: import('../../generated/client').PrismaClient;
+// Singleton pattern to prevent multiple instances during dev hot reload
+let prisma: PrismaClient;
+
+if (import.meta.env.DEV) {
+  // @ts-ignore
+  if (!global.prisma) {
+    global.prisma = new PrismaClient();
   }
+  prisma = global.prisma;
+} else {
+  prisma = new PrismaClient();
 }
 
-// Create or reuse the Prisma client (prevents exhausting connections during HMR)
-const cached = globalThis.__PRISMA_CLIENT__;
-
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
-export const prisma: PrismaClient = cached ?? new PrismaClient({ adapter });
-
-if (process.env.NODE_ENV !== 'production') {
-  globalThis.__PRISMA_CLIENT__ = prisma;
-}
+export { prisma };

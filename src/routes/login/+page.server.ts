@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { prisma } from 'prisma';
+import { prisma } from '$lib/server/prisma';
 import type { Actions } from './$types';
 
 export const actions: Actions = {

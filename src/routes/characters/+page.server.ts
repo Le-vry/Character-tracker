@@ -1,5 +1,5 @@
-import { prisma } from 'prisma';
-import { requireAuth } from '$lib/auth';
+import { prisma } from '$lib/server/prisma';
+import { requireAuth } from '$lib/server/auth';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ cookies }) => {
