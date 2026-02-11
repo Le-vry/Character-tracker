@@ -47,10 +47,19 @@ export const actions: Actions = {
 			return fail(400, { error: 'User already exists' });
 		}
 
+		// helper to get a random integer between min and max (inclusive)
+		const randInt = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
+
 		const newUser = await prisma.user.create({
 			data: {
 				username,
-				password
+				password,
+				character: {
+					create: {
+						gamesPlayed: randInt(5, 100),
+						gamesWon: randInt(5, 100)
+					}
+				}
 			}
 		});
 
