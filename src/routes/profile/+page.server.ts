@@ -1,6 +1,32 @@
 import { fail, redirect } from '@sveltejs/kit';
-import type { Actions } from '@sveltejs/kit';
+import type { Actions, ServerLoad } from '@sveltejs/kit';
 import { prisma } from '$lib';
+
+export const load: ServerLoad = async ({ locals }) => {
+  // Kontrollera att användaren är inloggad
+  if (!locals?.user) {
+    throw redirect(303, '/login');
+  }
+
+  // Hämta användarens profil data
+  const user = await prisma.user.findUnique({
+    where: { id: locals.user.id },
+    select: {
+      id: true,
+      username: true,
+      email: true,
+      profilePicture: true
+    }
+  });
+
+  if (!user) {
+    throw redirect(303, '/login');
+  }
+
+  return {
+    user
+  };
+};
 
 // Din uppgift: Implementera upload-logiken
 export const actions: Actions = {
