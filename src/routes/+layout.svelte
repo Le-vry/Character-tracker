@@ -8,6 +8,7 @@
 	<div class="link_container">
 		<li class="link"><a href="/">Home</a></li>
 		<li class="link"><a href="/characters">Characters</a></li>
+		<li class="link"><a href="/profile">profile</a></li>
 	</div>
 	
 </nav>

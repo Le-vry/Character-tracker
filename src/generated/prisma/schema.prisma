@@ -11,13 +11,14 @@ datasource db {
 }
 
 model User {
-  id        String     @id @default(uuid())
-  username  String     @unique
-  password  String
-  email     String?    @unique
-  createdAt DateTime   @default(now())
-  authToken String?    @unique
-  character Character?
+  id             String     @id @default(uuid())
+  username       String     @unique
+  password       String
+  profilePicture String? //Base64 encoded string
+  email          String?    @unique
+  createdAt      DateTime   @default(now())
+  authToken      String?    @unique
+  character      Character?
 }
 
 model Character {
