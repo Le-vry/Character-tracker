@@ -20,14 +20,14 @@
   <h1>Profile</h1>
   
   <div class="user-info">
-    <p><strong>Name:</strong> {data.user?.name || "N/A"}</p>
+    <p><strong>Name:</strong> {data.user.username || "N/A"}</p>
     <p><strong>Email:</strong> {data.user?.email || "N/A"}</p>
   </div>
 
   <div class="current-profile-picture">
     <h2>Current Profile Picture</h2>
     {#if data.user?.profilePicture}
-      <img src={data.user.profilePicture} alt={data.user.name} style="max-width:300px;max-height:300px;border-radius:8px" />
+      <img src={data.user.profilePicture} alt={data.user.username} style="max-width:300px;max-height:300px;border-radius:8px" />
     {:else}
       <p>No profile picture uploaded yet.</p>
     {/if}
