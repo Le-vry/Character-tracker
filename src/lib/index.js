@@ -1,6 +1,6 @@
 // place files you want to import through the `$lib` alias in this folder.
 import { env } from '$env/dynamic/private';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../generated/prisma';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
 
