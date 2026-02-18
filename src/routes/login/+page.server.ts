@@ -30,7 +30,7 @@ export const actions: Actions = {
 		const user = await prisma.user.findUnique({
 			where: { username }
 		});
-		
+
 		if (!user || !user.salt || !user.hash) {
 			return fail(400, { error: 'Invalid credentials' });
 		}

@@ -13,7 +13,6 @@ datasource db {
 model User {
   id             String     @id @default(uuid())
   username       String     @unique
-  password       String
   salt           String?    @unique // Unikt för varje användare
   hash           String? // Lösenord + salt, hashat
   profilePicture String? //Base64 encoded string
