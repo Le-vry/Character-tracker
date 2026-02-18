@@ -14,6 +14,10 @@
     }
   }
 
+  function removePreview(){
+    previewUrl = null;
+  }
+
 </script>
 
 <div class="profile-container">
@@ -37,7 +41,7 @@
     <h2>Upload New Profile Picture</h2>
     <form method="POST" action="?/upload" enctype="multipart/form-data" use:enhance>
       <input type="file" name="image" accept="image/*" on:change={handleFileChange} required />
-      <button type="submit">Upload Image</button>
+      <button type="submit" on:submit={() => removePreview()}>Upload Image</button>
     </form>
 
     {#if previewUrl}
