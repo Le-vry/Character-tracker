@@ -30,8 +30,8 @@ export const actions: Actions = {
 		const user = await prisma.user.findUnique({
 			where: { username }
 		});
-
-		if (!user || user.password !== password) {
+		
+		if (!user || !user.salt || !user.hash) {
 			return fail(400, { error: 'Invalid credentials' });
 		}
 
@@ -40,7 +40,7 @@ export const actions: Actions = {
 		if (!isValidPassword) {
 			return fail(400, { error: 'Invalid credentials' });
 		}
-		
+
 		cookies.set('userId', user.id, {
 			path: '/',
 			httpOnly: true,
