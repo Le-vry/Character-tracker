@@ -1,6 +1,7 @@
 // place files you want to import through the `$lib` alias in this folder.
 import { env } from '$env/dynamic/private';
-import { PrismaClient } from '../generated/prisma/client';
+const { PrismaClient } = await import('../generated/prisma/client')
+
 import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
 
