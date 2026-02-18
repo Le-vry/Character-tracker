@@ -73,10 +73,10 @@ export const actions: Actions = {
       });
 
       // Vid lyckad uppladdning, omdirigera tillbaka till profil
-      throw redirect(303, '/profile');
     } catch (e) {
       console.error('Upload error:', e);
       return fail(500, { error: 'Server error while saving image' });
     }
+    throw redirect(303, '/profile');
   }
 };
