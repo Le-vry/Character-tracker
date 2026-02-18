@@ -1,13 +1,14 @@
 // place files you want to import through the `$lib` alias in this folder.
 import { env } from '$env/dynamic/private';
 import { createRequire } from 'module';
+import path from 'path';
 
 // The generated Prisma client in `src/generated/prisma` is CommonJS.
-// The project package.json sets "type": "module", so Node treats
-// .js files as ESM which would make `require` undefined inside the
-// generated client. Use `createRequire` to load the CommonJS client.
+// Use `createRequire` to load the CommonJS client from an absolute
+// path (based on process.cwd()) so it resolves correctly after build.
 const require = createRequire(import.meta.url);
-const { PrismaClient } = require('../generated/prisma/client');
+const clientPath = path.join(process.cwd(), 'src', 'generated', 'prisma', 'client');
+const { PrismaClient } = require(clientPath);
 
 import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
