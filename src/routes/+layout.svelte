@@ -2,12 +2,9 @@
 	import favicon from '$lib/assets/favicon.svg';
 
 	let children = $props();
-	let data = globalThis.$globalData;
 
 	// Vilken global data vill du ha tillgänglig överallt?
-	$effect(() => {
-		document.documentElement.setAttribute('data-theme', data?.theme || 'light');
-	});
+	
 </script>
 
 <svelte:head>

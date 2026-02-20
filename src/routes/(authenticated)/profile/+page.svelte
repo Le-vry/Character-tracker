@@ -1,7 +1,7 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
   
-  export let data../../profile/$types.js;
+  export let data
 
   let previewUrl: string | null = null;
 
