@@ -9,7 +9,9 @@ declare global {
 				username: string;
 			} | null;
 		}
-		// interface PageData {}
+		interface PageData {
+			theme?: string;
+		}
 		// interface PageState {}
 		// interface Platform {}
 	}

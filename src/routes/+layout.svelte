@@ -1,31 +1,59 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
 
-	let { children } = $props();
+	let children = $props();
+	let data = globalThis.$globalData;
+
+	// Vilken global data vill du ha tillgänglig överallt?
+	$effect(() => {
+		document.documentElement.setAttribute('data-theme', data?.theme || 'light');
+	});
 </script>
 
-<nav>
-	<div class="link_container">
-		<li class="link"><a href="/">Home</a></li>
-		<li class="link"><a href="/characters">Characters</a></li>
-		<li class="link"><a href="/profile">profile</a></li>
-	</div>
-	
-</nav>
-
 <svelte:head>
+	<meta charset="utf-8" />
 	<link rel="icon" href={favicon} />
+	<meta name="viewport" content="width=device-width" />
 </svelte:head>
 
-{@render children()}
+<div id="app">
+	<nav>
+		<div class="link_container">
+			<li class="link"><a href="/">Character Tracker</a></li>
+			<li class="link"><a href="/characters">Characters</a></li>
+			<li class="link"><a href="/profile">profile</a></li>
+		</div>
+	</nav>
+
+	{@render children()}
+</div>
+
+<!-- Global styles, scripts, etc. -->
 
 <style>
+	/* Global CSS som gäller hela appen */
+	:global(body) {
+		margin: 0;
+		font-family: system-ui, sans-serif;
+	}
+
 	:global(body), :global(html){
 		margin: 0%;
 		padding: 0%;
 		height: 100vh;
 		width: 100vw;
 	} 
+
+	/* Tema-variabler */
+	:global([data-theme="light"]) {
+		--bg-color: white;
+		--text-color: black;
+	}
+
+	:global([data-theme="dark"]) {
+		--bg-color: black;
+		--text-color: white;
+	}
 	
 	nav{
 		display: flex;
