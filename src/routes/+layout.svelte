@@ -1,8 +1,6 @@
 <script lang="ts">
 	import favicon from '$lib/assets/favicon.svg';
 
-	let children = $props();
-
 	// Vilken global data vill du ha tillgänglig överallt?
 	
 </script>
@@ -21,8 +19,6 @@
 			<li class="link"><a href="/profile">profile</a></li>
 		</div>
 	</nav>
-
-	{@render children()}
 </div>
 
 <!-- Global styles, scripts, etc. -->
