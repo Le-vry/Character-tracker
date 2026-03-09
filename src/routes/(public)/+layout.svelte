@@ -10,7 +10,7 @@
 		margin: 0 auto;
 		padding: 1.25rem 1rem;
 		display: flex;
-		align-items: center;
-		justify-content: center;
+		align-items: flex-start;
+		justify-content: flex-start;
 	}
 </style>
