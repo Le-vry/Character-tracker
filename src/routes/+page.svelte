@@ -11,9 +11,9 @@
 
 <main>
 	<h1>Character Tracker</h1>
-	
+
 	{#if data.user}
-		<div>
+		<div class="card">
 			<p>Welcome back, {data.user.username}!</p>
 			<a href="/characters">View Characters</a>
 			<form method="POST" action="/logout">
@@ -21,10 +21,11 @@
 			</form>
 		</div>
 	{:else}
-		<div>
+		<div class="card">
 			<p>Get started by logging in or registering</p>
-			<div style="flex-direction: row;">
-                <a href="/login">Login</a><a href="/register">Register</a>
+			<div class="row-actions">
+				<a href="/login">Login</a>
+				<a href="/register">Register</a>
             </div>
 		</div>
 	{/if}
@@ -33,37 +34,67 @@
 <style>
 	main {
 		width: 100%;
-		height: 80%;
+		height: 100%;
 		display: flex;
 		flex-direction: column;
-        justify-content: top;
-        align-items: center;
-		overflow-x: hidden;
-        overflow-y: hidden;
-		background-size: cover;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		padding: 1rem;
 	}
 
 	h1 {
-		font-size: 2rem;
+		font-size: 1.8rem;
 		margin: 0;
-		flex-shrink: 0;
 	}
 
 	p {
-		margin: 0 0 1rem 0;
+		margin: 0;
 	}
 
-	div {
+	.card {
 		display: flex;
 		flex-direction: column;
-        align-items: center;
-		gap: 1rem;
-		max-width: 300px;
+		gap: 0.75rem;
+		width: 100%;
+		max-width: 360px;
+		padding: 1rem;
+		border: 1px solid #d1d5db;
+		border-radius: 0.5rem;
+		background: #fff;
+	}
+
+	.row-actions {
+		display: flex;
+		gap: 0.5rem;
+		flex-wrap: wrap;
+	}
+
+	a,
+	button {
+		font: inherit;
+	}
+
+	a {
+		text-decoration: none;
+		color: inherit;
+		padding: 0.45rem 0.7rem;
+		border: 1px solid #d1d5db;
+		border-radius: 0.35rem;
+		display: inline-block;
+		width: fit-content;
 	}
 
 	form {
 		display: flex;
-		gap: 1rem;
+	}
+
+	button {
+		padding: 0.45rem 0.7rem;
+		border: 1px solid #d1d5db;
+		background: #fff;
+		border-radius: 0.35rem;
+		cursor: pointer;
 	}
 </style>
 

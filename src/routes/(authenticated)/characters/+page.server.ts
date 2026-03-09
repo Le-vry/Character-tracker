@@ -1,11 +1,7 @@
 import { prisma } from '$lib';
-import { requireAuth } from '$lib/server/auth';
 import type { PageServerLoad } from './$types';
 
-export const load = (async ({ cookies }) => {
-	// Din uppgift: Använd requireAuth för att skydda sidan
-	const user = await requireAuth(cookies);
-	
+export const load = (async ({ locals }) => {
 	const characters = await prisma.character.findMany({
 		include: {
 			user: {
@@ -17,7 +13,7 @@ export const load = (async ({ cookies }) => {
 	});
 
 	return {
-		user: user,
+		user: locals.user,
 		characters: characters
 	};
 }) satisfies PageServerLoad;

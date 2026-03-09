@@ -1,8 +1,12 @@
 <script lang="ts">
+	interface LayoutData {
+		user: {
+			id: string;
+			username: string;
+		} | null;
+	}
 
-	export let data;
-	// Vilken global data vill du ha tillgänglig överallt?
-	
+	export let data: LayoutData;
 </script>
 
 <svelte:head>
@@ -12,76 +16,98 @@
 </svelte:head>
 
 <div id="app">
-	<nav>
-		<div class="link_container">
-			<li class="link"><a href="/">Character Tracker</a></li>
-			<li class="link"><a href="/characters">Characters</a></li>
-			<li class="link"><a href="/profile">profile</a></li>
-		</div>
-	</nav>
-	<slot />
+	<header class="site-header">
+		<nav class="nav">
+			<a href="/" class="brand">Character Tracker</a>
+			<div class="links">
+				{#if data.user}
+					<a href="/characters">Characters</a>
+					<a href="/profile">Profile</a>
+					<form action="/logout" method="POST">
+						<button type="submit">Logout</button>
+					</form>
+				{:else}
+					<a href="/login">Login</a>
+					<a href="/register">Register</a>
+				{/if}
+			</div>
+		</nav>
+	</header>
+
+	<main class="page-shell">
+		<slot />
+	</main>
 </div>
 <!-- Global styles, scripts, etc. -->
 
 <style>
-	/* Global CSS som gäller hela appen */
-	:global(body) {
+	:global(*) {
+		box-sizing: border-box;
+	}
+
+	:global(html), :global(body) {
 		margin: 0;
+		padding: 0;
+		min-height: 100%;
 		font-family: system-ui, sans-serif;
+		color: #1f2937;
+		background: #f6f7f9;
 	}
 
-	:global(body), :global(html){
-		margin: 0%;
-		padding: 0%;
-		height: 100vh;
-		width: 100vw;
-	} 
-
-	/* Tema-variabler */
-	:global([data-theme="light"]) {
-		--bg-color: white;
-		--text-color: black;
-	}
-
-	:global([data-theme="dark"]) {
-		--bg-color: black;
-		--text-color: white;
-	}
-	
-	nav{
+	#app {
+		min-height: 100vh;
 		display: flex;
-		flex-direction: row;
-		height: 4vh;
-		width: 100vw;
-		margin: 0vw;
-		border-bottom: 0.2vh #cecdcd solid;
-		box-shadow: 0px 0px 3px 2px #5454548a;
-		list-style: none;
-		overflow-x: hidden;
-	}
-	.link_container{
-		display: block;
-		position: fixed;
-		top: 7.5px;
-		width: 100vw;
-		align-content: center;
-		overflow-x: hidden;
+		flex-direction: column;
 	}
 
-	.link{
-		float: inline-start;
+	.site-header {
+		border-bottom: 1px solid #d1d5db;
+		background: #ffffff;
 	}
 
-	.link a{
-		padding-left: 1vh;
-		padding-right: 1vh;
-		padding-bottom: 0.3vh;
+	.nav {
+		max-width: 960px;
+		margin: 0 auto;
+		padding: 0.75rem 1rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.brand {
+		font-weight: 700;
 		text-decoration: none;
-		color: #545454;
-		border-right:2px #e3e2e2 solid;
+		color: inherit;
 	}
 
-	
-	
+	.links {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		flex-wrap: wrap;
+	}
+
+	.links a {
+		text-decoration: none;
+		color: inherit;
+		padding: 0.35rem 0.6rem;
+		border: 1px solid #d1d5db;
+		border-radius: 0.35rem;
+	}
+
+	.links button {
+		padding: 0.35rem 0.6rem;
+		border: 1px solid #d1d5db;
+		background: #fff;
+		border-radius: 0.35rem;
+		cursor: pointer;
+	}
+
+	.page-shell {
+		width: 100%;
+		flex: 1;
+		display: flex;
+	}
 
 </style>
