@@ -131,6 +131,14 @@ exports.Prisma.UserScalarFieldEnum = {
   authToken: 'authToken'
 };
 
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  expiresAt: 'expiresAt'
+};
+
 exports.Prisma.CharacterScalarFieldEnum = {
   id: 'id',
   gamesPlayed: 'gamesPlayed',
@@ -156,6 +164,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Session: 'Session',
   Character: 'Character'
 };
 

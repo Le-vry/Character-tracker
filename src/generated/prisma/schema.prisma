@@ -19,7 +19,20 @@ model User {
   email          String?    @unique
   createdAt      DateTime   @default(now())
   authToken      String?    @unique
+  sessions       Session[]
   character      Character?
+}
+
+model Session {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  @@index([userId])
+  @@index([expiresAt])
 }
 
 model Character {

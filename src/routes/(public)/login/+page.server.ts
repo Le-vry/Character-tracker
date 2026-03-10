@@ -51,6 +51,10 @@ function validatePasswordStrength(password: string): string[] {
   return errors;
 }
 
+function generateSecureToken(): string {
+	return crypto.randomBytes(32).toString('hex');
+}
+
 export const actions: Actions = {
 	login: async ({ request, cookies, getClientAddress }) => {
 		const clientIP = getClientAddress();
@@ -98,7 +102,18 @@ export const actions: Actions = {
 			// Nollställ vid lyckad inloggning
 			failedAttempts.delete(clientIP);
 
-				cookies.set('userId', user.id, {
+			const sessionToken = generateSecureToken();
+			const expiresAt = new Date(Date.now() + 60 * 60 * 24 * 7 * 1000);
+
+			await prisma.session.create({
+				data: {
+					token: sessionToken,
+					userId: user.id,
+					expiresAt
+				}
+			});
+
+				cookies.set('sessionToken', sessionToken, {
 					path: '/',
 					httpOnly: true,
 					secure: false,
@@ -151,7 +166,18 @@ export const actions: Actions = {
 			}
 		});
 
-		cookies.set('userId', newUser.id, {
+		const sessionToken = generateSecureToken();
+		const expiresAt = new Date(Date.now() + 60 * 60 * 24 * 7 * 1000);
+
+		await prisma.session.create({
+			data: {
+				token: sessionToken,
+				userId: newUser.id,
+				expiresAt
+			}
+		});
+
+		cookies.set('sessionToken', sessionToken, {
 			path: '/',
 			httpOnly: true,
 			secure: false,

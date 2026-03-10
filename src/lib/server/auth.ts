@@ -3,42 +3,48 @@ import { redirect } from '@sveltejs/kit';
 
 // Din uppgift: Implementera denna funktion
 export async function requireAuth(cookies: any) {
-  // 1. Få userId från cookies
-  const userId = cookies.get('userId');
+  const sessionToken = cookies.get('sessionToken');
   
-  // 2. Om ingen cookie: redirect till unauthorized
-  if (!userId) {
+  if (!sessionToken) {
     throw redirect(303, '/unauthorized');
   }
   
-  // 3. Hitta användare i databas
-  const user = await prisma.user.findUnique({
-    where: { id: userId }
+  const session = await prisma.session.findUnique({
+    where: { token: sessionToken },
+    include: { user: true }
   });
   
-  // 4. Om användare inte finns: rensa cookie och redirect
-  if (!user) {
-    cookies.delete('userId', { path: '/' });
+  if (!session || session.expiresAt <= new Date()) {
+    if (session) {
+      await prisma.session.delete({ where: { id: session.id } });
+    }
+    cookies.delete('sessionToken', { path: '/' });
     throw redirect(303, '/unauthorized');
   }
   
-  // 5. Returnera användaren
-  return user;
+  return session.user;
 }
 
 // Bonus: Skapa en "optional auth" funktion
 export async function getUser(cookies: any) {
-  // Din uppgift: Som requireAuth men utan redirect
-  // Returnera user eller null
-  const userId = cookies.get('userId');
+  const sessionToken = cookies.get('sessionToken');
   
-  if (!userId) {
+  if (!sessionToken) {
     return null;
   }
   
-  const user = await prisma.user.findUnique({
-    where: { id: userId }
+  const session = await prisma.session.findUnique({
+    where: { token: sessionToken },
+    include: { user: true }
   });
+
+  if (!session || session.expiresAt <= new Date()) {
+    if (session) {
+      await prisma.session.delete({ where: { id: session.id } });
+    }
+    cookies.delete('sessionToken', { path: '/' });
+    return null;
+  }
   
-  return user || null;
+  return session.user;
 }
