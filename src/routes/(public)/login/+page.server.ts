@@ -1,8 +1,9 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { prisma } from '$lib';
 import type { Actions } from '@sveltejs/kit';
+import { createSession } from '$lib/server/session';
 
-import * as crypto from "node:crypto";
+import crypto from "node:crypto";
 
 const failedAttempts = new Map<string, { count: number, lastAttempt: Date }>();
 
@@ -49,10 +50,6 @@ function validatePasswordStrength(password: string): string[] {
   }
   
   return errors;
-}
-
-function generateSecureToken(): string {
-	return crypto.randomBytes(32).toString('hex');
 }
 
 export const actions: Actions = {
@@ -102,29 +99,20 @@ export const actions: Actions = {
 			// Nollställ vid lyckad inloggning
 			failedAttempts.delete(clientIP);
 
-			const sessionToken = generateSecureToken();
-			const expiresAt = new Date(Date.now() + 60 * 60 * 24 * 7 * 1000);
+			const session = await createSession(user.id, request.headers.get('user-agent') ?? undefined, clientIP);
 
-			await prisma.session.create({
-				data: {
-					token: sessionToken,
-					userId: user.id,
-					expiresAt
-				}
-			});
-
-				cookies.set('sessionToken', sessionToken, {
+				cookies.set('sessionToken', session.token, {
 					path: '/',
 					httpOnly: true,
 					secure: false,
-					maxAge: 60 * 60 * 24 * 7 // 1 week
+					maxAge: 60 * 60 * 24 * 14 // 14 days
 				});
 
 		throw redirect(303, '/');
 		}
 	},
 
-	register: async ({ request, cookies }) => {
+	register: async ({ request, cookies, getClientAddress }) => {
 		const data = await request.formData();
 		const username = data.get('username')?.toString();
 		const password = data.get('password')?.toString();
@@ -166,22 +154,17 @@ export const actions: Actions = {
 			}
 		});
 
-		const sessionToken = generateSecureToken();
-		const expiresAt = new Date(Date.now() + 60 * 60 * 24 * 7 * 1000);
+		const session = await createSession(
+			newUser.id,
+			request.headers.get('user-agent') ?? undefined,
+			getClientAddress()
+		);
 
-		await prisma.session.create({
-			data: {
-				token: sessionToken,
-				userId: newUser.id,
-				expiresAt
-			}
-		});
-
-		cookies.set('sessionToken', sessionToken, {
+		cookies.set('sessionToken', session.token, {
 			path: '/',
 			httpOnly: true,
 			secure: false,
-			maxAge: 60 * 60 * 24 * 7 // 1 week
+			maxAge: 60 * 60 * 24 * 14 // 14 days
 		});
 
 		throw redirect(303, '/');

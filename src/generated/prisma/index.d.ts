@@ -1092,7 +1092,6 @@ export namespace Prisma {
     profilePicture: string | null
     email: string | null
     createdAt: Date | null
-    authToken: string | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -1103,7 +1102,6 @@ export namespace Prisma {
     profilePicture: string | null
     email: string | null
     createdAt: Date | null
-    authToken: string | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -1114,7 +1112,6 @@ export namespace Prisma {
     profilePicture: number
     email: number
     createdAt: number
-    authToken: number
     _all: number
   }
 
@@ -1127,7 +1124,6 @@ export namespace Prisma {
     profilePicture?: true
     email?: true
     createdAt?: true
-    authToken?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -1138,7 +1134,6 @@ export namespace Prisma {
     profilePicture?: true
     email?: true
     createdAt?: true
-    authToken?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -1149,7 +1144,6 @@ export namespace Prisma {
     profilePicture?: true
     email?: true
     createdAt?: true
-    authToken?: true
     _all?: true
   }
 
@@ -1228,12 +1222,11 @@ export namespace Prisma {
   export type UserGroupByOutputType = {
     id: string
     username: string
-    salt: string | null
-    hash: string | null
+    salt: string
+    hash: string
     profilePicture: string | null
     email: string | null
     createdAt: Date
-    authToken: string | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -1261,7 +1254,6 @@ export namespace Prisma {
     profilePicture?: boolean
     email?: boolean
     createdAt?: boolean
-    authToken?: boolean
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     character?: boolean | User$characterArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1275,7 +1267,6 @@ export namespace Prisma {
     profilePicture?: boolean
     email?: boolean
     createdAt?: boolean
-    authToken?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1286,7 +1277,6 @@ export namespace Prisma {
     profilePicture?: boolean
     email?: boolean
     createdAt?: boolean
-    authToken?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -1297,10 +1287,9 @@ export namespace Prisma {
     profilePicture?: boolean
     email?: boolean
     createdAt?: boolean
-    authToken?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "salt" | "hash" | "profilePicture" | "email" | "createdAt" | "authToken", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "username" | "salt" | "hash" | "profilePicture" | "email" | "createdAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     character?: boolean | User$characterArgs<ExtArgs>
@@ -1318,12 +1307,11 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       username: string
-      salt: string | null
-      hash: string | null
+      salt: string
+      hash: string
       profilePicture: string | null
       email: string | null
       createdAt: Date
-      authToken: string | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -1756,7 +1744,6 @@ export namespace Prisma {
     readonly profilePicture: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
-    readonly authToken: FieldRef<"User", 'String'>
   }
     
 
@@ -2219,25 +2206,37 @@ export namespace Prisma {
   export type SessionMinAggregateOutputType = {
     id: string | null
     token: string | null
-    userId: string | null
     createdAt: Date | null
+    lastUsed: Date | null
     expiresAt: Date | null
+    userAgent: string | null
+    ipAddress: string | null
+    deviceName: string | null
+    userId: string | null
   }
 
   export type SessionMaxAggregateOutputType = {
     id: string | null
     token: string | null
-    userId: string | null
     createdAt: Date | null
+    lastUsed: Date | null
     expiresAt: Date | null
+    userAgent: string | null
+    ipAddress: string | null
+    deviceName: string | null
+    userId: string | null
   }
 
   export type SessionCountAggregateOutputType = {
     id: number
     token: number
-    userId: number
     createdAt: number
+    lastUsed: number
     expiresAt: number
+    userAgent: number
+    ipAddress: number
+    deviceName: number
+    userId: number
     _all: number
   }
 
@@ -2245,25 +2244,37 @@ export namespace Prisma {
   export type SessionMinAggregateInputType = {
     id?: true
     token?: true
-    userId?: true
     createdAt?: true
+    lastUsed?: true
     expiresAt?: true
+    userAgent?: true
+    ipAddress?: true
+    deviceName?: true
+    userId?: true
   }
 
   export type SessionMaxAggregateInputType = {
     id?: true
     token?: true
-    userId?: true
     createdAt?: true
+    lastUsed?: true
     expiresAt?: true
+    userAgent?: true
+    ipAddress?: true
+    deviceName?: true
+    userId?: true
   }
 
   export type SessionCountAggregateInputType = {
     id?: true
     token?: true
-    userId?: true
     createdAt?: true
+    lastUsed?: true
     expiresAt?: true
+    userAgent?: true
+    ipAddress?: true
+    deviceName?: true
+    userId?: true
     _all?: true
   }
 
@@ -2342,9 +2353,13 @@ export namespace Prisma {
   export type SessionGroupByOutputType = {
     id: string
     token: string
-    userId: string
     createdAt: Date
+    lastUsed: Date
     expiresAt: Date
+    userAgent: string | null
+    ipAddress: string | null
+    deviceName: string | null
+    userId: string
     _count: SessionCountAggregateOutputType | null
     _min: SessionMinAggregateOutputType | null
     _max: SessionMaxAggregateOutputType | null
@@ -2367,39 +2382,55 @@ export namespace Prisma {
   export type SessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     token?: boolean
-    userId?: boolean
     createdAt?: boolean
+    lastUsed?: boolean
     expiresAt?: boolean
+    userAgent?: boolean
+    ipAddress?: boolean
+    deviceName?: boolean
+    userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
 
   export type SessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     token?: boolean
-    userId?: boolean
     createdAt?: boolean
+    lastUsed?: boolean
     expiresAt?: boolean
+    userAgent?: boolean
+    ipAddress?: boolean
+    deviceName?: boolean
+    userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
 
   export type SessionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     token?: boolean
-    userId?: boolean
     createdAt?: boolean
+    lastUsed?: boolean
     expiresAt?: boolean
+    userAgent?: boolean
+    ipAddress?: boolean
+    deviceName?: boolean
+    userId?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["session"]>
 
   export type SessionSelectScalar = {
     id?: boolean
     token?: boolean
-    userId?: boolean
     createdAt?: boolean
+    lastUsed?: boolean
     expiresAt?: boolean
+    userAgent?: boolean
+    ipAddress?: boolean
+    deviceName?: boolean
+    userId?: boolean
   }
 
-  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "userId" | "createdAt" | "expiresAt", ExtArgs["result"]["session"]>
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "token" | "createdAt" | "lastUsed" | "expiresAt" | "userAgent" | "ipAddress" | "deviceName" | "userId", ExtArgs["result"]["session"]>
   export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -2418,9 +2449,13 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       token: string
-      userId: string
       createdAt: Date
+      lastUsed: Date
       expiresAt: Date
+      userAgent: string | null
+      ipAddress: string | null
+      deviceName: string | null
+      userId: string
     }, ExtArgs["result"]["session"]>
     composites: {}
   }
@@ -2847,9 +2882,13 @@ export namespace Prisma {
   interface SessionFieldRefs {
     readonly id: FieldRef<"Session", 'String'>
     readonly token: FieldRef<"Session", 'String'>
-    readonly userId: FieldRef<"Session", 'String'>
     readonly createdAt: FieldRef<"Session", 'DateTime'>
+    readonly lastUsed: FieldRef<"Session", 'DateTime'>
     readonly expiresAt: FieldRef<"Session", 'DateTime'>
+    readonly userAgent: FieldRef<"Session", 'String'>
+    readonly ipAddress: FieldRef<"Session", 'String'>
+    readonly deviceName: FieldRef<"Session", 'String'>
+    readonly userId: FieldRef<"Session", 'String'>
   }
     
 
@@ -4372,8 +4411,7 @@ export namespace Prisma {
     hash: 'hash',
     profilePicture: 'profilePicture',
     email: 'email',
-    createdAt: 'createdAt',
-    authToken: 'authToken'
+    createdAt: 'createdAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -4382,9 +4420,13 @@ export namespace Prisma {
   export const SessionScalarFieldEnum: {
     id: 'id',
     token: 'token',
-    userId: 'userId',
     createdAt: 'createdAt',
-    expiresAt: 'expiresAt'
+    lastUsed: 'lastUsed',
+    expiresAt: 'expiresAt',
+    userAgent: 'userAgent',
+    ipAddress: 'ipAddress',
+    deviceName: 'deviceName',
+    userId: 'userId'
   };
 
   export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
@@ -4494,12 +4536,11 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     id?: StringFilter<"User"> | string
     username?: StringFilter<"User"> | string
-    salt?: StringNullableFilter<"User"> | string | null
-    hash?: StringNullableFilter<"User"> | string | null
+    salt?: StringFilter<"User"> | string
+    hash?: StringFilter<"User"> | string
     profilePicture?: StringNullableFilter<"User"> | string | null
     email?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
-    authToken?: StringNullableFilter<"User"> | string | null
     sessions?: SessionListRelationFilter
     character?: XOR<CharacterNullableScalarRelationFilter, CharacterWhereInput> | null
   }
@@ -4507,12 +4548,11 @@ export namespace Prisma {
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     username?: SortOrder
-    salt?: SortOrderInput | SortOrder
-    hash?: SortOrderInput | SortOrder
+    salt?: SortOrder
+    hash?: SortOrder
     profilePicture?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    authToken?: SortOrderInput | SortOrder
     sessions?: SessionOrderByRelationAggregateInput
     character?: CharacterOrderByWithRelationInput
   }
@@ -4520,28 +4560,26 @@ export namespace Prisma {
   export type UserWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     username?: string
-    salt?: string
     email?: string
-    authToken?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    hash?: StringNullableFilter<"User"> | string | null
+    salt?: StringFilter<"User"> | string
+    hash?: StringFilter<"User"> | string
     profilePicture?: StringNullableFilter<"User"> | string | null
     createdAt?: DateTimeFilter<"User"> | Date | string
     sessions?: SessionListRelationFilter
     character?: XOR<CharacterNullableScalarRelationFilter, CharacterWhereInput> | null
-  }, "id" | "username" | "salt" | "email" | "authToken">
+  }, "id" | "username" | "email">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     username?: SortOrder
-    salt?: SortOrderInput | SortOrder
-    hash?: SortOrderInput | SortOrder
+    salt?: SortOrder
+    hash?: SortOrder
     profilePicture?: SortOrderInput | SortOrder
     email?: SortOrderInput | SortOrder
     createdAt?: SortOrder
-    authToken?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -4553,12 +4591,11 @@ export namespace Prisma {
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"User"> | string
     username?: StringWithAggregatesFilter<"User"> | string
-    salt?: StringNullableWithAggregatesFilter<"User"> | string | null
-    hash?: StringNullableWithAggregatesFilter<"User"> | string | null
+    salt?: StringWithAggregatesFilter<"User"> | string
+    hash?: StringWithAggregatesFilter<"User"> | string
     profilePicture?: StringNullableWithAggregatesFilter<"User"> | string | null
     email?: StringNullableWithAggregatesFilter<"User"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-    authToken?: StringNullableWithAggregatesFilter<"User"> | string | null
   }
 
   export type SessionWhereInput = {
@@ -4567,18 +4604,26 @@ export namespace Prisma {
     NOT?: SessionWhereInput | SessionWhereInput[]
     id?: StringFilter<"Session"> | string
     token?: StringFilter<"Session"> | string
-    userId?: StringFilter<"Session"> | string
     createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastUsed?: DateTimeFilter<"Session"> | Date | string
     expiresAt?: DateTimeFilter<"Session"> | Date | string
+    userAgent?: StringNullableFilter<"Session"> | string | null
+    ipAddress?: StringNullableFilter<"Session"> | string | null
+    deviceName?: StringNullableFilter<"Session"> | string | null
+    userId?: StringFilter<"Session"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type SessionOrderByWithRelationInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
     createdAt?: SortOrder
+    lastUsed?: SortOrder
     expiresAt?: SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    deviceName?: SortOrderInput | SortOrder
+    userId?: SortOrder
     user?: UserOrderByWithRelationInput
   }
 
@@ -4588,18 +4633,26 @@ export namespace Prisma {
     AND?: SessionWhereInput | SessionWhereInput[]
     OR?: SessionWhereInput[]
     NOT?: SessionWhereInput | SessionWhereInput[]
-    userId?: StringFilter<"Session"> | string
     createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastUsed?: DateTimeFilter<"Session"> | Date | string
     expiresAt?: DateTimeFilter<"Session"> | Date | string
+    userAgent?: StringNullableFilter<"Session"> | string | null
+    ipAddress?: StringNullableFilter<"Session"> | string | null
+    deviceName?: StringNullableFilter<"Session"> | string | null
+    userId?: StringFilter<"Session"> | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id" | "token">
 
   export type SessionOrderByWithAggregationInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
     createdAt?: SortOrder
+    lastUsed?: SortOrder
     expiresAt?: SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    deviceName?: SortOrderInput | SortOrder
+    userId?: SortOrder
     _count?: SessionCountOrderByAggregateInput
     _max?: SessionMaxOrderByAggregateInput
     _min?: SessionMinOrderByAggregateInput
@@ -4611,9 +4664,13 @@ export namespace Prisma {
     NOT?: SessionScalarWhereWithAggregatesInput | SessionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Session"> | string
     token?: StringWithAggregatesFilter<"Session"> | string
-    userId?: StringWithAggregatesFilter<"Session"> | string
     createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    lastUsed?: DateTimeWithAggregatesFilter<"Session"> | Date | string
     expiresAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    userAgent?: StringNullableWithAggregatesFilter<"Session"> | string | null
+    ipAddress?: StringNullableWithAggregatesFilter<"Session"> | string | null
+    deviceName?: StringNullableWithAggregatesFilter<"Session"> | string | null
+    userId?: StringWithAggregatesFilter<"Session"> | string
   }
 
   export type CharacterWhereInput = {
@@ -4671,12 +4728,11 @@ export namespace Prisma {
   export type UserCreateInput = {
     id?: string
     username: string
-    salt?: string | null
-    hash?: string | null
+    salt: string
+    hash: string
     profilePicture?: string | null
     email?: string | null
     createdAt?: Date | string
-    authToken?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
     character?: CharacterCreateNestedOneWithoutUserInput
   }
@@ -4684,12 +4740,11 @@ export namespace Prisma {
   export type UserUncheckedCreateInput = {
     id?: string
     username: string
-    salt?: string | null
-    hash?: string | null
+    salt: string
+    hash: string
     profilePicture?: string | null
     email?: string | null
     createdAt?: Date | string
-    authToken?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     character?: CharacterUncheckedCreateNestedOneWithoutUserInput
   }
@@ -4697,12 +4752,11 @@ export namespace Prisma {
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    salt?: NullableStringFieldUpdateOperationsInput | string | null
-    hash?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
     character?: CharacterUpdateOneWithoutUserNestedInput
   }
@@ -4710,12 +4764,11 @@ export namespace Prisma {
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    salt?: NullableStringFieldUpdateOperationsInput | string | null
-    hash?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     character?: CharacterUncheckedUpdateOneWithoutUserNestedInput
   }
@@ -4723,89 +4776,114 @@ export namespace Prisma {
   export type UserCreateManyInput = {
     id?: string
     username: string
-    salt?: string | null
-    hash?: string | null
+    salt: string
+    hash: string
     profilePicture?: string | null
     email?: string | null
     createdAt?: Date | string
-    authToken?: string | null
   }
 
   export type UserUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    salt?: NullableStringFieldUpdateOperationsInput | string | null
-    hash?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    salt?: NullableStringFieldUpdateOperationsInput | string | null
-    hash?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authToken?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionCreateInput = {
     id?: string
     token: string
     createdAt?: Date | string
+    lastUsed?: Date | string
     expiresAt: Date | string
+    userAgent?: string | null
+    ipAddress?: string | null
+    deviceName?: string | null
     user: UserCreateNestedOneWithoutSessionsInput
   }
 
   export type SessionUncheckedCreateInput = {
     id?: string
     token: string
-    userId: string
     createdAt?: Date | string
+    lastUsed?: Date | string
     expiresAt: Date | string
+    userAgent?: string | null
+    ipAddress?: string | null
+    deviceName?: string | null
+    userId: string
   }
 
   export type SessionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsed?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutSessionsNestedInput
   }
 
   export type SessionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsed?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type SessionCreateManyInput = {
     id?: string
     token: string
-    userId: string
     createdAt?: Date | string
+    lastUsed?: Date | string
     expiresAt: Date | string
+    userAgent?: string | null
+    ipAddress?: string | null
+    deviceName?: string | null
+    userId: string
   }
 
   export type SessionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsed?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsed?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
+    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type CharacterCreateInput = {
@@ -4922,7 +5000,6 @@ export namespace Prisma {
     profilePicture?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
-    authToken?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -4933,7 +5010,6 @@ export namespace Prisma {
     profilePicture?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
-    authToken?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -4944,7 +5020,6 @@ export namespace Prisma {
     profilePicture?: SortOrder
     email?: SortOrder
     createdAt?: SortOrder
-    authToken?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -5005,25 +5080,37 @@ export namespace Prisma {
   export type SessionCountOrderByAggregateInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
     createdAt?: SortOrder
+    lastUsed?: SortOrder
     expiresAt?: SortOrder
+    userAgent?: SortOrder
+    ipAddress?: SortOrder
+    deviceName?: SortOrder
+    userId?: SortOrder
   }
 
   export type SessionMaxOrderByAggregateInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
     createdAt?: SortOrder
+    lastUsed?: SortOrder
     expiresAt?: SortOrder
+    userAgent?: SortOrder
+    ipAddress?: SortOrder
+    deviceName?: SortOrder
+    userId?: SortOrder
   }
 
   export type SessionMinOrderByAggregateInput = {
     id?: SortOrder
     token?: SortOrder
-    userId?: SortOrder
     createdAt?: SortOrder
+    lastUsed?: SortOrder
     expiresAt?: SortOrder
+    userAgent?: SortOrder
+    ipAddress?: SortOrder
+    deviceName?: SortOrder
+    userId?: SortOrder
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -5348,14 +5435,22 @@ export namespace Prisma {
     id?: string
     token: string
     createdAt?: Date | string
+    lastUsed?: Date | string
     expiresAt: Date | string
+    userAgent?: string | null
+    ipAddress?: string | null
+    deviceName?: string | null
   }
 
   export type SessionUncheckedCreateWithoutUserInput = {
     id?: string
     token: string
     createdAt?: Date | string
+    lastUsed?: Date | string
     expiresAt: Date | string
+    userAgent?: string | null
+    ipAddress?: string | null
+    deviceName?: string | null
   }
 
   export type SessionCreateOrConnectWithoutUserInput = {
@@ -5406,9 +5501,13 @@ export namespace Prisma {
     NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
     id?: StringFilter<"Session"> | string
     token?: StringFilter<"Session"> | string
-    userId?: StringFilter<"Session"> | string
     createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastUsed?: DateTimeFilter<"Session"> | Date | string
     expiresAt?: DateTimeFilter<"Session"> | Date | string
+    userAgent?: StringNullableFilter<"Session"> | string | null
+    ipAddress?: StringNullableFilter<"Session"> | string | null
+    deviceName?: StringNullableFilter<"Session"> | string | null
+    userId?: StringFilter<"Session"> | string
   }
 
   export type CharacterUpsertWithoutUserInput = {
@@ -5436,24 +5535,22 @@ export namespace Prisma {
   export type UserCreateWithoutSessionsInput = {
     id?: string
     username: string
-    salt?: string | null
-    hash?: string | null
+    salt: string
+    hash: string
     profilePicture?: string | null
     email?: string | null
     createdAt?: Date | string
-    authToken?: string | null
     character?: CharacterCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
     id?: string
     username: string
-    salt?: string | null
-    hash?: string | null
+    salt: string
+    hash: string
     profilePicture?: string | null
     email?: string | null
     createdAt?: Date | string
-    authToken?: string | null
     character?: CharacterUncheckedCreateNestedOneWithoutUserInput
   }
 
@@ -5476,48 +5573,44 @@ export namespace Prisma {
   export type UserUpdateWithoutSessionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    salt?: NullableStringFieldUpdateOperationsInput | string | null
-    hash?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authToken?: NullableStringFieldUpdateOperationsInput | string | null
     character?: CharacterUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    salt?: NullableStringFieldUpdateOperationsInput | string | null
-    hash?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authToken?: NullableStringFieldUpdateOperationsInput | string | null
     character?: CharacterUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutCharacterInput = {
     id?: string
     username: string
-    salt?: string | null
-    hash?: string | null
+    salt: string
+    hash: string
     profilePicture?: string | null
     email?: string | null
     createdAt?: Date | string
-    authToken?: string | null
     sessions?: SessionCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCharacterInput = {
     id?: string
     username: string
-    salt?: string | null
-    hash?: string | null
+    salt: string
+    hash: string
     profilePicture?: string | null
     email?: string | null
     createdAt?: Date | string
-    authToken?: string | null
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
   }
 
@@ -5540,24 +5633,22 @@ export namespace Prisma {
   export type UserUpdateWithoutCharacterInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    salt?: NullableStringFieldUpdateOperationsInput | string | null
-    hash?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCharacterInput = {
     id?: StringFieldUpdateOperationsInput | string
     username?: StringFieldUpdateOperationsInput | string
-    salt?: NullableStringFieldUpdateOperationsInput | string | null
-    hash?: NullableStringFieldUpdateOperationsInput | string | null
+    salt?: StringFieldUpdateOperationsInput | string
+    hash?: StringFieldUpdateOperationsInput | string
     profilePicture?: NullableStringFieldUpdateOperationsInput | string | null
     email?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    authToken?: NullableStringFieldUpdateOperationsInput | string | null
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
@@ -5565,28 +5656,44 @@ export namespace Prisma {
     id?: string
     token: string
     createdAt?: Date | string
+    lastUsed?: Date | string
     expiresAt: Date | string
+    userAgent?: string | null
+    ipAddress?: string | null
+    deviceName?: string | null
   }
 
   export type SessionUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsed?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsed?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SessionUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
     token?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsed?: DateTimeFieldUpdateOperationsInput | Date | string
     expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    deviceName?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
 

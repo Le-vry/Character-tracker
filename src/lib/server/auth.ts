@@ -1,5 +1,5 @@
-import { prisma } from '$lib';
 import { redirect } from '@sveltejs/kit';
+import { validateSession } from './session';
 
 // Din uppgift: Implementera denna funktion
 export async function requireAuth(cookies: any) {
@@ -9,15 +9,9 @@ export async function requireAuth(cookies: any) {
     throw redirect(303, '/unauthorized');
   }
   
-  const session = await prisma.session.findUnique({
-    where: { token: sessionToken },
-    include: { user: true }
-  });
+  const session = await validateSession(sessionToken);
   
-  if (!session || session.expiresAt <= new Date()) {
-    if (session) {
-      await prisma.session.delete({ where: { id: session.id } });
-    }
+  if (!session) {
     cookies.delete('sessionToken', { path: '/' });
     throw redirect(303, '/unauthorized');
   }
@@ -33,15 +27,9 @@ export async function getUser(cookies: any) {
     return null;
   }
   
-  const session = await prisma.session.findUnique({
-    where: { token: sessionToken },
-    include: { user: true }
-  });
+  const session = await validateSession(sessionToken);
 
-  if (!session || session.expiresAt <= new Date()) {
-    if (session) {
-      await prisma.session.delete({ where: { id: session.id } });
-    }
+  if (!session) {
     cookies.delete('sessionToken', { path: '/' });
     return null;
   }

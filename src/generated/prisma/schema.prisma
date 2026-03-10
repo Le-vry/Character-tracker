@@ -11,28 +11,30 @@ datasource db {
 }
 
 model User {
-  id             String     @id @default(uuid())
-  username       String     @unique
-  salt           String?    @unique // Unikt för varje användare
-  hash           String? // Lösenord + salt, hashat
+  id             String   @id @default(uuid())
+  username       String   @unique
+  salt           String // Unikt för varje användare
+  hash           String // Lösenord + salt, hashat
   profilePicture String? //Base64 encoded string
-  email          String?    @unique
-  createdAt      DateTime   @default(now())
-  authToken      String?    @unique
-  sessions       Session[]
-  character      Character?
+  email          String?  @unique
+  createdAt      DateTime @default(now())
+
+  sessions  Session[]
+  character Character?
 }
 
 model Session {
-  id        String   @id @default(uuid())
-  token     String   @unique
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
-  expiresAt DateTime
+  id         String   @id @default(uuid())
+  token      String   @unique
+  createdAt  DateTime @default(now())
+  lastUsed   DateTime @default(now())
+  expiresAt  DateTime
+  userAgent  String?
+  ipAddress  String?
+  deviceName String?
 
-  @@index([userId])
-  @@index([expiresAt])
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 }
 
 model Character {

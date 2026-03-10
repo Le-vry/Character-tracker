@@ -6,7 +6,7 @@ export const actions = {
 		const sessionToken = cookies.get('sessionToken');
 
 		if (sessionToken) {
-			await prisma.session.deleteMany({ where: { token: sessionToken } });
+			await prisma.session.delete({ where: { token: sessionToken } }).catch(() => null);
 		}
 
 		cookies.delete('sessionToken', { path: '/' });

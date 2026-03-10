@@ -1,5 +1,5 @@
-import { prisma } from '$lib';
 import type { Handle } from '@sveltejs/kit';
+import { validateSession } from '$lib/server/session';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const sessionToken = event.cookies.get('sessionToken');
@@ -9,24 +9,13 @@ export const handle: Handle = async ({ event, resolve }) => {
 		return resolve(event);
 	}
 
-	const session = await prisma.session.findUnique({
-		where: { token: sessionToken },
-		include: {
-			user: {
-				select: { id: true, username: true }
-			}
-		}
-	});
+	const session = await validateSession(sessionToken);
 
-	if (session && session.expiresAt > new Date()) {
-		event.locals.user = session.user;
+	if (session) {
+		event.locals.user = { id: session.user.id, username: session.user.username };
 	} else {
 		if (sessionToken) {
 			event.cookies.delete('sessionToken', { path: '/' });
-		}
-
-		if (session) {
-			await prisma.session.delete({ where: { id: session.id } });
 		}
 
 		event.locals.user = null;

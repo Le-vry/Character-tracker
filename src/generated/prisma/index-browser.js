@@ -127,16 +127,19 @@ exports.Prisma.UserScalarFieldEnum = {
   hash: 'hash',
   profilePicture: 'profilePicture',
   email: 'email',
-  createdAt: 'createdAt',
-  authToken: 'authToken'
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
   id: 'id',
   token: 'token',
-  userId: 'userId',
   createdAt: 'createdAt',
-  expiresAt: 'expiresAt'
+  lastUsed: 'lastUsed',
+  expiresAt: 'expiresAt',
+  userAgent: 'userAgent',
+  ipAddress: 'ipAddress',
+  deviceName: 'deviceName',
+  userId: 'userId'
 };
 
 exports.Prisma.CharacterScalarFieldEnum = {
