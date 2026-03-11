@@ -5,10 +5,15 @@ function generateSessionToken(): string {
 	return crypto.randomBytes(32).toString('base64url');
 }
 
-export async function createSession(userId: string, userAgent?: string, ipAddress?: string) {
+export async function createSession(
+	userId: string,
+	userAgent?: string,
+	ipAddress?: string,
+	sessionDays: number = 14
+) {
 	const token = generateSessionToken();
 	const expiresAt = new Date();
-	expiresAt.setDate(expiresAt.getDate() + 14);
+	expiresAt.setDate(expiresAt.getDate() + sessionDays);
 
 	const session = await prisma.session.create({
 		data: {

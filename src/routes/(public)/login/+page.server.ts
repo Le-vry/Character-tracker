@@ -70,6 +70,7 @@ export const actions: Actions = {
 		const data = await request.formData();
 		const username = data.get('username')?.toString();
 		const password = data.get('password')?.toString();
+		const rememberMe = data.get('rememberMe') === 'on';
 
 		if (!username || !password || typeof username !== 'string' || typeof password !== 'string') {
 			return fail(400, { error: 'Missing username or password' });
@@ -99,14 +100,20 @@ export const actions: Actions = {
 			// Nollställ vid lyckad inloggning
 			failedAttempts.delete(clientIP);
 
-			const session = await createSession(user.id, request.headers.get('user-agent') ?? undefined, clientIP);
+			const sessionDays = rememberMe ? 90 : 14;
+			const session = await createSession(
+				user.id,
+				request.headers.get('user-agent') ?? undefined,
+				clientIP,
+				sessionDays
+			);
 
-				cookies.set('sessionToken', session.token, {
-					path: '/',
-					httpOnly: true,
-					secure: false,
-					maxAge: 60 * 60 * 24 * 14 // 14 days
-				});
+			cookies.set('sessionToken', session.token, {
+				path: '/',
+				httpOnly: true,
+				secure: false,
+				maxAge: 60 * 60 * 24 * sessionDays
+			});
 
 		throw redirect(303, '/');
 		}

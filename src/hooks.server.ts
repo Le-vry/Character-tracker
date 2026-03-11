@@ -1,5 +1,6 @@
 import type { Handle } from '@sveltejs/kit';
 import { validateSession } from '$lib/server/session';
+import '$lib/sessionCleanup';
 
 export const handle: Handle = async ({ event, resolve }) => {
 	const sessionToken = event.cookies.get('sessionToken');

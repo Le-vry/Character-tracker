@@ -19,6 +19,12 @@
 				<label for="password">Password</label>
 				<input id="password" name="password" type="password" required />
 			</div>
+			<div class="form-group form-group--checkbox">
+				<label>
+					<input type="checkbox" name="rememberMe" />
+					Remember me for 90 days
+				</label>
+			</div>
 			<button type="submit">Login</button>
 			<p>Don't have an account? <a href="/register">Register</a></p>
 		</form>
@@ -72,6 +78,24 @@
 		flex-direction: column;
 		width: 100%;
 		gap: 0.35rem;
+	}
+
+	.form-group--checkbox {
+		flex-direction: row;
+		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.form-group--checkbox label {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		cursor: pointer;
+	}
+
+	.form-group--checkbox input[type='checkbox'] {
+		width: auto;
+		padding: 0;
 	}
 
 	input {
