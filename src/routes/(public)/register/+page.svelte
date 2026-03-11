@@ -10,7 +10,7 @@
 			<div class="error">{form.error}</div>
 		{/if}
 
-		<form method="POST" action="/login?/register">
+		<form method="POST" action="?/register">
 			<div class="form-group">
 				<label for="username">Username</label>
 				<input id="username" name="username" type="text" required />

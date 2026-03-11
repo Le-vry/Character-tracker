@@ -1,7 +1,6 @@
 import type { Actions } from '@sveltejs/kit';
-import { loginAction, registerAction } from '$lib/server/auth';
+import { registerAction } from '$lib/server/auth';
 
 export const actions: Actions = {
-	login: loginAction,
 	register: registerAction
 };
